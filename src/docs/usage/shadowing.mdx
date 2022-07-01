@@ -12,7 +12,7 @@ If you don't know what shadowing is, or have questions about it, [check this tut
 If you want to change the logo just create the following file:
 
 ```js title=src/@rocketseat/gatsby-theme-docs/components/Logo.js
-import React from 'react';
+import React from "react";
 
 export default function Logo(props) {
   return (
@@ -33,10 +33,10 @@ export default function Logo(props) {
 If your logo is a png, you could use it like this:
 
 ```js title=src/@rocketseat/gatsby-theme-docs/components/Logo.js
-import React from 'react';
+import React from "react";
 
 // Path to the logo file on your project
-import rocketseatLogo from 'assets/logo.png';
+import rocketseatLogo from "assets/logo.png";
 
 const Logo = () => (
   <img src={rocketseatLogo} alt="Rocketseat logo" style={{ width: 180 }} />
@@ -54,13 +54,13 @@ Create a file at `src/@rocketseat/gatsby-theme-docs/text/index.mdx` to edit the 
 
 My awesome project!
 
-import Navigation from '@rocketseat/gatsby-theme-docs/src/components/Docs/PostNav';
+import Navigation from "@rocketseat/gatsby-theme-docs/src/components/Docs/PostNav";
 
 <Navigation
   prev={null}
   next={{
-    label: 'Installation',
-    link: '/installation',
+    label: "Installation",
+    link: "/installation",
   }}
 />
 ```
@@ -74,8 +74,8 @@ Remember that you need to restart your server to see the update.
 ```js title=src/@rocketseat/gatsby-theme-docs/styles/theme.js
 export default {
   colors: {
-    primary: '#8257E6',
-    background: '#FFFFFF',
+    primary: "#8257E6",
+    background: "#FFFFFF",
     shape: `#F2F2FA`,
     title: `#3D3D4D`,
     text: `#6C6C80`,
@@ -99,10 +99,10 @@ To do this, create a file under `src/@rocketseat/gatsby-theme-docs/styles/theme.
 export default {
   fonts: {
     fontFace: {
-      family: 'Roboto',
-      file: '/fonts/roboto-regular-webfont',
+      family: "Roboto",
+      file: "/fonts/roboto-regular-webfont",
     },
-    body: 'Roboto',
+    body: "Roboto",
   },
 };
 ```
@@ -128,8 +128,8 @@ By default we add some elements to React Live Scope. If you need to add more, ju
 shadow the following file:
 
 ```js title=src/@rocketseat/gatsby-theme-docs/components/Code/LiveCodeScope.js
-import { mdx } from '@mdx-js/react';
-import { css, jsx } from '@emotion/react';
+import { mdx } from "@mdx-js/react";
+import { css, jsx } from "@emotion/react";
 
 export default {
   css,

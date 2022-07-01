@@ -1,24 +1,50 @@
 ---
-title: Creating docs
-description: Learn how to create docs using Rocket Docs.
+title: Importing a dataset
+description: Learn how to import a dataset into VoiceSmith.
 ---
 
-All MDX files created inside your docs folder will become pages, with the path defined by the filename.
-Inside all docs files, you can define the following options:
+The first thing you should do is to import a dataset into VoiceSmith. VoiceSmith requires your dataset
+to follow a certain pattern. Each speaker is represented by a folder whose name is the speaker's name.
+The folder contains the samples of the speaker. Each sample consists of one audio and one text file.
+Both audio and text files have to have the same name. In the .txt files you simply write the transcription
+of the audio file. Below is an example of a correctly formatted dataset that contains two speakers
+with two samples each. As you can see supported audio extensions are .flac and .wav:
 
-| Key                    | Required | Description                |
-| ---------------------- | -------- | -------------------------- |
-| title                  | Yes      | No                         |
-| description            | No       | Page description           |
-| image                  | No       | Used for og:image          |
-| disableTableOfContents | No       | Disables Table Of Contents |
+```
+.
+└── The Simpsons <- this folder represents the dataset name
+    └── Homer Simpson <- this folder represents the first speakers name
+        ├── dF4mNcv1.wav <- this file is the audio part of the first sample of the speaker "Homer Simpson"
+        ├── dF4mNcv1.txt <- this file is the text part of the first sample of the speaker "Homer Simpson"
+        ├── M0J6zoHw.flac
+        ├── M0J6zoHw.txt
+        └── ...
+    └── Bart Simpson <- this folder represents the second speakers name
+        ├── v1jo6jh.wav
+        ├── v1jo6jh.txt
+        ├── M0J6zoHw.flac
+        ├── M0J6zoHw.txt
+        └── ...
+    ...
+```
+
+The audio files can be sampled at any sampling rate as they will be resampled later. However, for best audio
+quality, it is recommended to have a sampling rate of at least 22.05khz.
+
+VoiceSmith can preprocess and train on dataset which contain only on or multiple speakers. You can also
+import datasets with speakers who speak different languages. Keep in mind that while you can have different
+speakers who speak different languages in your dataset each speaker should speak only one language. If you
+have audio of Homer Simpson who speaks english and spanish you should create two speakers and name
+them for example "Homer Simpson (english)" and "Homer Simpson (spanish)".
+
+Let's say we want to create the dataset above.
 
 ## Example
 
 ```mdx
 ---
-title: 'My Example'
-description: 'A simple description for this page'
+title: "My Example"
+description: "A simple description for this page"
 image: /banner.jpeg
 disableTableOfContents: false
 ---
@@ -44,7 +70,7 @@ To show a title, just add it to your code block. Ex: `title=src/myfile.css`
 
 ```css title=src/myfile.css
 .gatsby::before {
-  content: 'niceee...';
+  content: "niceee...";
 }
 ```
 
@@ -54,7 +80,7 @@ To add line numbers for that code block, pass an option `lineNumbers=true`.
 
 ```js lineNumbers=true
 const rocket = {
-  launch: () => console.log('Launching...'),
+  launch: () => console.log("Launching..."),
 };
 
 rocket.launch();
@@ -70,7 +96,7 @@ To use it, just add a `live=true` option to your code block.
 ```jsx lineNumbers=true title=gatsby-config.js live=true
 function MyComponent() {
   function handleButtonClick() {
-    alert('wowww');
+    alert("wowww");
   }
 
   return <button onClick={handleButtonClick}>Hey, click me!</button>;
@@ -89,7 +115,7 @@ For example `highlight={1-4,6-7,9}` on the code below would result in:
 ```jsx highlight={1-4,6-7,9}
 function MyComponent() {
   function handleButtonClick() {
-    alert('wowww');
+    alert("wowww");
   }
 
   return <button onClick={handleButtonClick}>Hey, click me!</button>;

@@ -6,8 +6,8 @@
   link: "/getting-started"
 - label: Usage
   items:
-    - label: "Navigation"
-      link: "/usage/navigation"
+    - label: "Importing a dataset"
+      link: "/usage/importing-a-dataset"
     - label: "Shadowing"
       link: "/usage/shadowing"
     - label: "Using YAML files"
