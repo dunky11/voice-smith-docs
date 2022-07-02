@@ -8,7 +8,7 @@ module.exports = {
     siteAuthor: `@dunky11`,
     siteImage: `/banner.png`,
     siteLanguage: `en`,
-    themeColor: `#8257E6`,
+    themeColor: `#2f54eb`,
     basePath: `/`,
   },
   plugins: [
@@ -46,6 +46,13 @@ module.exports = {
       options: {
         siteUrl: `https://rocketdocs.netlify.app`,
       },
+    },
+    {
+      resolve: 'gatsby-source-filesystem', 
+      options: {
+        name: 'images',
+        path: `${__dirname}/src/images/`
+      }
     },
     `gatsby-plugin-offline`,
     `gatsby-plugin-image`,

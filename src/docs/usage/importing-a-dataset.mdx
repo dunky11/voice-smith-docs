@@ -37,89 +37,29 @@ speakers who speak different languages in your dataset each speaker should speak
 have audio of Homer Simpson who speaks english and spanish you should create two speakers and name
 them for example "Homer Simpson (english)" and "Homer Simpson (spanish)".
 
-Let's say we want to create the dataset above.
+Let's say we want to create the dataset above. First click on "Datasets" in the Navigation and
+then click on "Create Empty Dataset". Click on the pen next to the created datasets name to give
+your dataset a name, lets call it "The Simpsons".
 
-## Example
+import { TestImage } from "../../components/images";
 
-```mdx
----
-title: "My Example"
-description: "A simple description for this page"
-image: /banner.jpeg
-disableTableOfContents: false
----
+<TestImage />
 
-Wow, this is a nice page
-```
+Next we have to add Speakers to our dataset. To do that click on "select" on right side in the table.
+Then click on "Add Speakers From Folder". Select the language of the speakers you want to add to the dataset
+from the dropdown and click on "Pick Speakers".
 
-## Embedding files
+<TestImage />
 
-In a documentation website, sometimes you will need to embed well known services (like CodeSandbox, Twitter, or others...). If you need to
-do it, you can simply copy-paste the link (powered by the awesome [gatsby-remark-embeder](https://www.gatsbyjs.com/packages/gatsby-remark-embedder/)).
-Make sure to check the [supported services](https://github.com/MichaelDeBoey/gatsby-remark-embedder#supported-services).
+As described in the graphic above each speaker is represented by a folder, so we will select both the
+folders named "Homer Simpson" and "Bart Simpson". You can add multiple speakers at once by first left-clicking
+on one folder and then shift+left clicking on another folder. Click on "Open" to confirm the selection.
 
-https://youtu.be/QfcozcbDhNM
+The speakers and their samples will now imported into the software. Depending on the number of text-audio pairs
+this can take multiple minutes.
 
-## Code Highlight
-
-We support many options for code components.
-
-### Title
-
-To show a title, just add it to your code block. Ex: `title=src/myfile.css`
-
-```css title=src/myfile.css
-.gatsby::before {
-  content: "niceee...";
-}
-```
-
-### Line numbers
-
-To add line numbers for that code block, pass an option `lineNumbers=true`.
-
-```js lineNumbers=true
-const rocket = {
-  launch: () => console.log("Launching..."),
-};
-
-rocket.launch();
-```
-
-### React live
-
-As mentioned in the introduction, this theme uses `react-live`, so you can
-create a playground for live editing React components.
-
-To use it, just add a `live=true` option to your code block.
-
-```jsx lineNumbers=true title=gatsby-config.js live=true
-function MyComponent() {
-  function handleButtonClick() {
-    alert("wowww");
-  }
-
-  return <button onClick={handleButtonClick}>Hey, click me!</button>;
-}
-
-render(<MyComponent />);
-```
-
-> If you need to add elements to the scope, check this [guide](/usage/shadowing#adding-elements-to-react-live-scope).
-
-### Highlight lines
-
-To highlight lines, you can pass ranges to a `highlight` option.
-For example `highlight={1-4,6-7,9}` on the code below would result in:
-
-```jsx highlight={1-4,6-7,9}
-function MyComponent() {
-  function handleButtonClick() {
-    alert("wowww");
-  }
-
-  return <button onClick={handleButtonClick}>Hey, click me!</button>;
-}
-
-render(<MyComponent />);
-```
+If your imported dataset is noisy it can now be cleaned up by VoiceSmiths automatic dataset preprocessing tools.
+While they can improve the quality of the final voices, using those tools is optional and their usefulness
+depends on your dataset. Next we will exlain the three preprocessing tools:
+"Text Normalization", "Sample Splitting" and "Dataset Cleaning". You can also skip them and jump straight ahead
+to "Training" in order to clone the voices of the speakers in your dataset.

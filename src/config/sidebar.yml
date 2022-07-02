@@ -8,13 +8,15 @@
   items:
     - label: "Importing a dataset"
       link: "/usage/importing-a-dataset"
-    - label: "Shadowing"
-      link: "/usage/shadowing"
-    - label: "Using YAML files"
-      link: "/usage/using-yaml-files"
+    - label: "Text normalization"
+      link: "/usage/text-normalization"
+    - label: "Sample splitting"
+      link: "/usage/sample-splitting"
+    - label: "Dataset cleaning"
+      link: "/usage/dataset-cleaning"
 - label: More
   items:
     - label: FAQ
       link: /faq
     - label: "Github"
-      link: https://github.com/jpedroschmitz/rocketdocs
+      link: https://github.com/dunky11/voicesmith
