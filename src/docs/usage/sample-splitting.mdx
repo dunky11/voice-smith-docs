@@ -5,7 +5,7 @@ description: Learn how to use VoiceSmith to automatically split a dataset at sen
 
 ## What is sample splitting?
 
-Real world datasets often contain samples which contain multiple sentences. This is problematic in three ways:
+Datasets outside the comfortable world of academia often contain samples which contain multiple sentences. This is problematic in three ways:
 
 1. If some samples contain a single sentence and some samples contain multiple sentences it can confuse the model
    and make it harder to learn from the data.
@@ -15,7 +15,7 @@ Real world datasets often contain samples which contain multiple sentences. This
    training configuration will ignore samples with a duration exceeding 10 seconds. If you split the long samples into smaller ones
    you can therefore increase the size of your dataset which improves the final model.
 
-VoiceSmith can automatically split samples in your dataset as sentence breaks, this works on all [supported languages](/).
+VoiceSmith can automatically split samples in your dataset at sentence breaks, this works on all [supported languages](/).
 
 ## How to split a dataset at sentence breaks
 
@@ -38,3 +38,43 @@ Here you can configure your sample splitting run. Current configuration options 
 | Forced Aligner Batch Size | How many samples to process at once during aligning the text with the audio files. Higher numbers mean faster alignment but larger disk space requirements together with a higher chance for things to go wrong. Recommended to be set to a very high value like 200.000.                                                                                         |
 | Dataset                   | Dataset to normalize, if a dataset is greyed out is already referenced by a run. If you haven't imported a dataset yet check out [Importing a dataset](/usage/importing-a-dataset).                                                                                                                                                                               |
 | Device                    | Controls whether you want to use the CPU or GPU for ressource hungry computations. It is highly advised to set this to GPU if possible. If the GPU greyed out your graphics card may not be supported by CUDA.                                                                                                                                                    |
+
+### Preprocessing
+
+After you have configured the sample splitting run it's waiting time. VoiceSmith will calculate the locations on
+where to split your text and audio files using four steps:
+
+1. Copy Files:
+   Samples will be copied into a temporary folder for further processing.
+2. Generate Vocabulary:
+   A multilingual grapheme to phoneme model (G2P) will be used to generate a table that
+   maps every word in your datasets to its phonemes.
+3. Generate Alignments:
+   With the help of [Montreal Forced Aligner](https://montreal-forced-aligner.readthedocs.io/en/latest/)
+   and the generated vocabulary, timestamps are generated corresponding to the beginning and end of each
+   phoneme in the audio files.
+4. Creating Splits:
+   A sentence tokenizer is used to split the texts into sentences. The timestamps generated in step three
+   will be used to split the audios according to the sentence breaks.
+
+Depending on the dataset size this can take minutes to hours.
+
+### Choose Samples
+
+A table is shown of all samples that will be normalized. The table has the following columns:
+
+| Column     | Description                                                  |
+| ---------- | ------------------------------------------------------------ |
+| Text       | Text before splitting the sample.                            |
+| Speaker    | Name of the speaker the sample belongs to.                   |
+| Split Into | A list containing the samples the sample will be split into. |
+
+It is advised to at least skim through the table as sample splitting is not perfect. If there are samples which you don't want to be split,
+you can select them using the checkboxes on the left and then click on "Do not split selected". Those samples will stay in the dataset but will not be split.
+
+If you are happy with the list of splits to apply you can click on "Next".
+
+### Creating Splits
+
+VoiceSmith will now swap out the samples in your dataset with the splits in the previous table. After this is finished you can
+remove the sample splitting run.

@@ -7,16 +7,18 @@
 - label: Usage
   items:
     - label: "Importing a dataset"
-      link: "/usage/importing-a-dataset"
+      link: "/usage/dataset-importing"
     - label: "Text normalization"
       link: "/usage/text-normalization"
     - label: "Sample splitting"
       link: "/usage/sample-splitting"
     - label: "Dataset cleaning"
       link: "/usage/dataset-cleaning"
+    - label: "Training a model"
+      link: "/usage/training"
+    - label: "Generating audio"
+      link: "/usage/audio-generation"
 - label: More
   items:
-    - label: FAQ
-      link: /faq
     - label: "Github"
       link: https://github.com/dunky11/voicesmith
