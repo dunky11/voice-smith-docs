@@ -5,92 +5,93 @@ description: Learn how to use VoiceSmith to train a multilingual text-to-speech 
 
 ## How does this work?
 
-VoiceSmiths provides pretrained models which already learned how to talk in multiple languages by being
-trained on a large multilingual dataset. These pretrained models can be used to be further trained on your
-dataset, this is called fine-tuning. This process of pretraining on large datasets and then fine-tuning on
+VoiceSmith provides pre-trained models that learned how to talk in multiple languages by being
+trained on a large multilingual dataset. These pre-trained models can be used to be further trained on your
+dataset. This is called fine-tuning. This process of pretraining on large datasets and then fine-tuning on
 smaller ones has some advantages:
 
-- It reduces the amount of training data needed to create a realistic voice.
-- It has shown to improve overall voice quality.
-- It reduces the amount of time spend on training.
-- Since VoiceSmith was trained on multiple languages it makes it possible to train a voice
-  in one language and then make it speak in another (code-switching). You could for example
-  train a model of Homer Simpson using only english samples and then make it speak french, german,
-  russian, spanish or polish. How well it speaks the foreign language is dependent on number of files
-  in the foreign language VoiceSmith was pretrained on. [Click here](/) for a table showing the amount
-  of pretraining data used.
+- It reduces training data needed to create a realistic voice.
+- It has been shown to improve overall voice quality.
+- It reduces the amount of time spent on training.
+- Since VoiceSmith was trained on multiple languages, it is possible to train a voice in one
+  language and then make it speak in another (code-switching). For example, you could train a
+  model of Homer Simpson using only English samples and then make it speak French, German, Russian etc...
+  How well it speaks the foreign language is dependent on the number of samples in the foreign language
+  VoiceSmith was pre-trained on. [Click here](/) for a table showing the amount of pretraining data used.
 
 ## How to fine-tune the model on your dataset
 
 ### Creating a training run
 
-First you have to create a new training run. Click on
-"Training Runs" in the navigation and then click on "Train New Model". Afterwards
-click on "Select" on the right side of the newly created run. The process of training is split into
-six steps, but don't worry, you only have to actually do stuff in the first one, the other five are
-automatic.
+First, you have to create a new training run. Click on
+"Training Runs" in the navigation and click "Train New Model."
+Afterward, click "Select" on the right side of the newly created run.
+The training process is split into six steps, but don't worry, you only have to do stuff
+in the first one. The other five are automatic.
 
 ### Configuration
 
 Here you can configure your training run. Current configuration options include:
 
-| Name                   | Description                                                                                                                                                                                                                                                                                      |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Name                   | Name used for identification purposes, is arbitrary.                                                                                                                                                                                                                                             |
-| On Error Ignore Sample | Controls the behaviour of what will happen if a sample in your dataset could not be loaded for some reason. If set to "Yes" the sample will be ignored in the run and a message will be written into the log. If set to "No" a message will be written into the log and the run will be stopped. |
-| Dataset                | Dataset to train on, if a dataset is greyed out is already referenced by a run. If you haven't imported a dataset yet check out [Importing a dataset](/usage/importing-a-dataset).                                                                                                               |
-| Device                 | Controls whether you want to use the CPU or GPU for ressource hungry computations. It is highly advised to set this to GPU if possible. If the GPU greyed out your graphics card may not be supported by CUDA.                                                                                   |
+| Name                   | Description                                                                                                                                                                                                                                                                            |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name                   | Name used for identification purposes. Arbitrary.                                                                                                                                                                                                                                      |
+| On Error Ignore Sample | Controls the behaviour of what will happen if a sample in your dataset could not be loaded for some reason. If set to "Yes," the sample will be ignored and a message will be written into the log. If set to "No" a message will be written into the log and the run will be stopped. |
+| Dataset                | Dataset to normalize. If a dataset is greyed out, it is already referenced by a run. If you haven't imported a dataset, check out [Importing a dataset](/usage/importing-a-dataset).                                                                                                   |
+| Device                 | Controls whether you want to use the CPU or GPU for ressource hungry computations. It is highly advised to set this to GPU if possible. If the GPU greyed out, your graphics card mght not be supported by CUDA.                                                                       |
 
 The rest of the configuration is split into tabs:
 
 #### Preprocessing Configuration
 
-| Name                      | Description                                                                                                                                                                                                                                                                                                                                                       |
-| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Validation Size           | Percentage of samples in the dataset that will be randomly chosen and put into the validation dataset. The validation dataset is used for calculating the validation losses. Calculating the validation losses is important to measure the level of overfitting.                                                                                                  |
-| Forced Aligner Batch Size | How many samples to process at once during aligning the text with the audio files. Higher numbers mean faster alignment but larger disk space requirements together with a higher chance for things to go wrong. Recommended to be set to a very high value like 200.000.                                                                                         |
-| Maximum Worker Count      | Equivalent to the number of CPU cores to use during parts of preprocessing. Should be less or equal to the number of cores your CPU has. If set on "auto" this will be set to maximum(1, number of CPU cores). Also has an influence on the RAM usage during preprocessing, if your run suddenly freezes during preprocessing reducing the worker count may help. |
-| Minimum Seconds           | Audio files with a duration less than minimum seconds will not be preprocessed and ignored during training.                                                                                                                                                                                                                                                       |
-| Maximum Seconds           | Audio files with a duration longer than maximum seconds will not be preprocessed and ignored during training. Note that the length of the largest audio in the dataset is proportional to the maximum amount of RAM/VRAM used during training. If you encounter out of memory issues reducing this value may be an option.                                        |
-| Apply Audio Normalization | Apply peak normalization where each audio is divided by its highest absolute PCM value so the loudness in each audio is roughly the same. Normalizing loudness can improve training especially when the dataset comes from multiple sources.                                                                                                                      |
+| Name                      | Description                                                                                                                                                                                                                                                                                                                                                             |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Validation Size           | Percentage of samples in the dataset that will be randomly chosen and put into the validation dataset. The validation dataset is used for calculating the validation losses. Calculating the validation losses is essential to measure the level of overfitting.                                                                                                        |
+| Forced Aligner Batch Size | How many samples to process at once while aligning the text with the audio files. Higher numbers mean faster alignment but more extensive disk space requirements and a higher chance for things to go wrong. Recommended to be set to a very high value like 200.000.                                                                                                  |
+| Maximum Worker Count      | Equivalent to the number of CPU cores to use during parts of preprocessing. It should be less or equal to the number of cores your CPU has. If set to "auto," this will be set to maximum(1, number of CPU cores). Also has an influence on the RAM usage during preprocessing - if your run suddenly freezes during preprocessing, reducing the worker count may help. |
+| Minimum Seconds           | Audio files with a duration of less than minimum seconds will not be preprocessed and ignored during training.                                                                                                                                                                                                                                                          |
+| Maximum Seconds           | Audio files with a duration longer than maximum seconds will not be preprocessed and ignored during training. Note that the length of the largest audio in the dataset is proportional to the maximum amount of RAM/VRAM used during training. Reducing this value may be an option if you encounter out-of-memory issues.                                              |
+| Apply Audio Normalization | Apply peak normalization where each audio is divided by its highest absolute PCM value, so the loudness in each audio is roughly the same. Normalizing loudness can improve training, especially when the dataset comes from multiple sources.                                                                                                                          |
 
 #### Acoustic Model Configuration
 
 | Name                            | Description                                                                                                                                                                                                          |
 | ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Learning Rate                   | Learning rate to use during training. A higher rate means faster but more unstable training. Usually set to a very small value less than one but higher than zero.                                                   |
-| Training Steps                  | Number of times the model will be updated. A higher value means more time spend on training, a potentially better model, but also more risk of overfitting.                                                          |
-| Batch Size                      | Number of samples to be fed through the model at once. A smaller value means less RAM/VRAM usage but potentially more training steps needed for the model to converge.                                               |
-| Gradient Accumulation Steps     | Number of times samples are fed through the model per step. A higher values means potentially more stable training but will also increase the time spend on each step.                                               |
-| Run Validation Every            | How many steps to take before calculating the validation losses on the validation dataset. A higher value means less time spend on training but will also make it harder to measure the level of overfitting.        |
-| Train Only Speaker Embeds Until | How many steps, at the beginning of the training, to only train the speaker embeddings. Increasing this value means potentially better voice quality but longer training duration. Should not exceed training steps. |
+| Learning Rate                   | Learning rate to use during training. A higher rate means faster but more unstable training. Usually set to a very small value, less than one but higher than zero.                                                  |
+| Training Steps                  | Number of times the model will be updated. A higher value means more time spent on training, a potentially better model, but also more risk of overfitting.                                                          |
+| Batch Size                      | Number of samples to be fed through the model simultaneously. A smaller value means less RAM/VRAM usage but potentially more training steps needed for the model to converge.                                        |
+| Gradient Accumulation Steps     | Number of times samples are fed through the model per step. A higher value means potentially more stable training but will also increase the time spent on each step.                                                |
+| Run Validation Every            | How many steps to take before calculating the validation losses on the dataset. A higher value means less time spent on training but will also make it harder to measure the level of overfitting.                   |
+| Train Only Speaker Embeds Until | How many steps to only train the speaker embeddings at the beginning of the training. Increasing this value means potentially better voice quality but a longer training duration. Should not exceed training steps. |
 
 #### Vocoder Model Configuration
 
-| Name                        | Description                                                                                                                                                                                                   |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Learning Rate               | Learning rate to use during training. A higher rate means faster but more unstable training. Usually set to a very small value less than one but higher than zero.                                            |
-| Training Steps              | Number of times the model will be updated. A higher value means more time spend on training, a potentially better model, but also more risk of overfitting.                                                   |
-| Batch Size                  | Number of samples to be fed through the model at once. A smaller value means less RAM/VRAM usage but potentially more training steps needed for the model to converge.                                        |
-| Gradient Accumulation Steps | Number of times samples are fed through the model per step. A higher values means potentially more stable training but will also increase the time spend on each step.                                        |
-| Run Validation Every        | How many steps to take before calculating the validation losses on the validation dataset. A higher value means less time spend on training but will also make it harder to measure the level of overfitting. |
+| Name                        | Description                                                                                                                                                                                        |
+| --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Learning Rate               | Learning rate to use during training. A higher rate means faster but more unstable training. Usually set to a very small value, less than one but higher than zero.                                |
+| Training Steps              | Number of times the model will be updated. A higher value means more time spent on training, a potentially better model, but also more risk of overfitting.                                        |
+| Batch Size                  | Number of samples to be fed through the model simultaneously. A smaller value means less RAM/VRAM usage but potentially more training steps needed for the model to converge.                      |
+| Gradient Accumulation Steps | Number of times samples are fed through the model per step. A higher value means potentially more stable training but will also increase the time spent on each step.                              |
+| Run Validation Every        | How many steps to take before calculating the validation losses on the dataset. A higher value means less time spent on training but will also make it harder to measure the level of overfitting. |
 
-Click on "Save" to save your configuration or click on "Save and Start Training" to start the training process.
+Click on "Save" to save your configuration, or click on "Save and Start Training" to start the training process.
 
-**Everything from now on is run automatically, no more input is required.** VoiceSmith will automatically checkpoint
-your progress at certain milestones so you can always shut off the software and come back later to resume training. How long it takes
+From now on **everything is run automatically, no more input is required.** VoiceSmith will automatically checkpoint
+your progress at certain milestones, so you can always shut off the software and come back later to resume training. How long it takes
 to train your model is dependent on some factors:
 
-- The hardware of your computer, having a modern GPU, CPU and SSD can all significantly speed up training.
-- Whether you train on CPU or on GPU, GPU is much much faster.
+- The hardware of your computer, having a modern GPU, CPU and SSD, can all significantly speed up training.
+- Whether you train on CPU or on GPU, GPU is much faster.
 - Your configuration above.
 
-Generally speaking everything from 30 minutes to a few days is normal. Next we will explain the steps involved in training your model,
-you don't really have to know them but it can help in finding better configuration values in order to improve audio quality.
+Generally everything from 30 minutes to a few days is normal.
+
+Next, we will explain the steps involved in training your model,
+you don't have to know them, but it can help find better configuration values to improve audio quality.
 
 ### Data Preprocessing
 
-Before training the model your dataset has to be preprocessed, this involves four sequential steps:
+Before training the model, your dataset has to be preprocessed, this involves four sequential steps:
 
 1. Copy Files:
    Samples will be copied into a temporary folder for further processing.
@@ -99,62 +100,94 @@ Before training the model your dataset has to be preprocessed, this involves fou
    maps every word in your datasets to its phonemes.
 3. Generate Alignments:
    With the help of [Montreal Forced Aligner](https://montreal-forced-aligner.readthedocs.io/en/latest/)
-   and the generated vocabulary, timestamps are generated corresponding to the beginning and end of each
+   and the generated vocabulary, timestamps are created corresponding to the beginning and end of each
    phoneme in the audio files.
 4. Extract Data:
-   Audio will be resampled and normalized, pitch will be extracted and audios are transformed into mel-spectrograms,
+   Audio will be resampled and normalized, the pitch will be extracted and audios are transformed into mel-spectrograms,
    a visual representation of sound.
 
 ### Acoustic Model Fine-Tuning
 
 This page details the acoustic model training progress. The model is a beefed-up and modified version of [DelighfulTTS](https://arxiv.org/pdf/2110.12612.pdf).
-The job of the acoustic model is to map phonemes and speaker information into spectrograms. The information is broken down into several parts:
+The job of the acoustic model is to map phonemes and speaker information into spectrograms. The training progress information is broken down into several parts:
 
 #### Media
 
-| Name                          | Description                                                                                                                                                                                                                                            |
-| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Ground Truth Mel-Spectrograms | Here ground truth mel-spectrograms from the validation set are listed, your model tries to map phonemes and speaker information into this image.                                                                                                       |
-| Synthesized Mel-Spectrograms  | Here synthesized mel-spectrograms from the validation set are listed. The objective of the model is to create an image that matches the ground truth spectrogram. The less blurry this image is the better the voice quality of your speakers will be. |
-| Synthesized Audio             | Here a random text from your validation set is transformed into audio. Audio quality                                                                                                                                                                   |
+| Name                          | Description                                                                                                                                                                                                                        |
+| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Ground Truth Mel-Spectrograms | Ground truth mel-spectrograms from the validation set. Your model tries to map phonemes and speaker information into this image.                                                                                                   |
+| Synthesized Mel-Spectrograms  | Synthesized mel-spectrograms from the validation set. The model's objective is to create an image that matches the ground truth spectrogram. The less blurry this image is, the better the voice quality of your speakers will be. |
+| Synthesized Audio             | Audio corresponding to the text of a random sample in your validation sample.                                                                                                                                                      |
 
 #### Hyperparameters
 
-| Name                          | Description                                                                                                                           |
-| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| Learning Rate                 | The current learning rate of your model, the higher the learning rate the more your model is changed after every step.                |
-| Only Train Speaker Embeddings | If one, only the speaker embeddings are currenly trained (usually during beginning of training). If zero, the whole model is trained. |
+| Name                          | Description                                                                                                                                |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Learning Rate                 | The current learning rate of your model, the higher the learning rate, the more your model changes after every step.                       |
+| Only Train Speaker Embeddings | If one, only the speaker embeddings are currently trained (usually during the beginning of training). If zero, the whole model is updated. |
 
 #### Metrics
 
-| Name                    | Description                                                                                                                                                                                                                                                                                                                                                 |
-| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Mel Spectral Distortion | Mel spectral distortion between samples synthesized from the validation set and their ground truth mel-spectrograms. The sythesized spectrograms are aligned with the ground truth spectrograms using [dynamic time warping](https://en.wikipedia.org/wiki/Dynamic_time_warping). This is a general measure of audio quality. The lower this is the better. |
+| Name                    | Description                                                                                                                                                                                                                                                                                                                                                   |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Mel Spectral Distortion | Mel spectral distortion between samples synthesized from the validation set and their ground truth mel-spectrograms. The synthesized spectrograms are aligned with the ground truth spectrograms using [dynamic time warping](https://en.wikipedia.org/wiki/Dynamic_time_warping). This is a general measure of audio quality. The lower this is, the better. |
 
 #### Losses
 
-All losses include two curves, a training loss curve and a validation loss curve. You want both to go down. If validation loss goes up
-while training loss declines or stays the same it means your model is overfitting, which you want to avoid.
+All losses include two curves, a training loss curve and a validation loss curve. You want both to go down.
+If validation loss goes up while training loss declines or stays the same, your model is overfitting,
+which you want to avoid.
 
-| Name                         | Description                                                                                                                                               |
-| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Reconstruction Loss          | The sum of all other losses, this is the value the model tries to minimize. The lower the better.                                                         |
-| Mel Loss                     | Mean absolute error between synthesized and ground truth mel-spectrograms. The lower the better.                                                          |
-| Structural Similarity Loss   | One minus the structural similarity between synthesized and ground truth mel-spectrograms. The lower the better.                                          |
-| Pitch Loss                   | Mean squared error between predicted and ground-truth pitch values. The lower is better.                                                                  |
-| Utterance Level Prosody Loss | Mean absolute error between the utterance level prosody prediction of the acoustic model and the outputs of the reference encoder. The lower is better.   |
-| Phoneme Level Prosody Loss   | Mean absolute error between the phoneme level prosody prediction of the acoustic model and the outputs of the reference encoder. The lower is better.     |
-| Duration loss                | Mean squared error between the logarithm of the ground truth phoneme duration and the logarithm of the models duration predictions. The lower the better. |
+| Name                         | Description                                                                                                                                                 |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Reconstruction Loss          | The sum of all other losses. This is the value the model tries to minimize. The lower, the better.                                                          |
+| Mel Loss                     | Mean absolute error between synthesized and ground truth mel-spectrograms. The lower, the better.                                                           |
+| Structural Similarity Loss   | One minus the structural similarity between synthesized and ground truth mel-spectrograms. The lower, the better.                                           |
+| Pitch Loss                   | Mean squared error between predicted and ground-truth pitch values. The lower, is better.                                                                   |
+| Utterance Level Prosody Loss | Mean absolute error between the utterance level prosody prediction of the acoustic model and the outputs of the reference encoder. The lower, is better.    |
+| Phoneme Level Prosody Loss   | Mean absolute error between the phoneme level prosody prediction of the acoustic model and the outputs of the reference encoder. The lower, is better.      |
+| Duration loss                | Mean squared error between the logarithm of the ground truth phoneme duration and the logarithm of the model's duration predictions. The lower, the better. |
 
-#### Generate Ground Truth Alignments
+### Generate Ground Truth Alignments
 
-After the acoustic model has been fine-tuned on your dataset the model will
+After the acoustic model has been fine-tuned on your dataset, the model will
 make mel-spectrogram predictions for each sample in your dataset.
 
 Those predictions will be saved on disk and be used to fine-tune the vocoder in the
 next step.
 
-#### Vocoder Fine-Tuning
+### Vocoder Fine-Tuning
 
-The vocoders job is to transform the mel-spectrograms generated by the acoustic
+The vocoder's job is to transform the mel-spectrograms generated by the acoustic
 model into actual audio. [UnivNet-c32](https://arxiv.org/pdf/2106.07889v1.pdf) is the current vocoder used.
+The training progress information is broken down into several parts:
+
+#### Media
+
+| Name              | Description                                                                                                                                                       |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Real Audio        | An audio sample taken from the validation set.                                                                                                                    |
+| Synthesized Audio | The same sample used in "Real Audio," but fed through both the acoustic model and vocoder. This is roughly the audio quality you can expect from the final model. |
+
+#### Hyperparameters
+
+| Name          | Description                                                                                                          |
+| ------------- | -------------------------------------------------------------------------------------------------------------------- |
+| Learning Rate | The current learning rate of your model, the higher the learning rate, the more your model changes after every step. |
+
+#### Losses
+
+All losses include two curves, a training loss curve and a validation loss curve. You want both to go down. If validation loss goes up
+while training loss declines or stays the same, your model is overfitting, which you want to avoid.
+
+| Name                     | Description                                                                                         |
+| ------------------------ | --------------------------------------------------------------------------------------------------- |
+| Total Loss Generator     | Sum of all losses of the generator. The vocoder tries to minimize this.                             |
+| Total Loss Discriminator | Sum of all losses of the discriminators. The discriminators try to minimize this.                   |
+| Mel L1 Loss              | Mean absolute error between spectrograms extracted from the generated and ground truth audio waves. |
+
+### Save Model
+
+After fine-tuning both the acoustic model and vocoder, it's time to finalize the run and save your model.
+This step shouldn't take more than a few minutes. Afterward, the stage will be set to "finished," and a
+new model will appear on the "Models" page of the application. You are now ready to synthesize audio.

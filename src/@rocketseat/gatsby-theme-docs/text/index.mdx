@@ -1,43 +1,40 @@
 # Introduction
 
-VoiceSmith makes training text-to-speech models easy. It lets you fine-tune a 
-120 million parameter beefed-up version of DelightfulTTS on your dataset. The model was 
+VoiceSmith makes training text-to-speech models easy. It lets you fine-tune a
+120 million parameter beefed-up version of DelightfulTTS on your dataset. The model was
 pretrained on a proprietary multilingual dataset containing over 8000 speakers.
 It also provides tools commonly used to preprocess text-to-speech datasets.
 
 ## Features
 
-- State of the art text-to-speech pipeline based on DelightfulTTS and UnivNet
+- Solid text-to-speech pipeline based on DelightfulTTS and UnivNet, always kept up to date
 - Pretrained on a proprietary dataset containing 8000+ speakers in 5 languages
-- Supports training on 14 languages out of the box
+- Supports training in 14 languages out of the box
 - Works both for single-speaker and multi-speaker models
-- Support for code switching - train on one language, talk in another language
-- Zero coding experience required
-- Battle tested on large datasets, containing millions of samples
+- Support for code-switching - train in one language, talk in another one
+- Battle-tested on large datasets containing millions of samples
 - Highly optimized inference using torchserve
-- Controllabilty through the option to use SSML
-- Can automatically detect and filter out noisy samples in your dataset
-- Support for automatic text normalization in german, english, spanish and russian
-- Automatically split text and audio samples at sentence breaks in 14 languages
+- Controllability through the option to use SSML
+- Tools to automatically improve the quality of your datasets
 
 ### Overview
 
-| Language | Training + Inference | Sample Splitting | Text Normalization | Files Pretrained | Speakers Pretrained
-| -------- | -------------------- | ---------------- | ------------------ | ------------------ | ---------------------
-| English  | ✓ | ✓ | ✓ | 978283 | 5415
-| German   | ✓ | ✓ | ✓ | 380175 | 1034
-| French   | ✓ | ✓ | | 382797 | 1013
-| Spanish  | ✓ | ✓ | ✓ | 327944 | 960
-| Russian  | ✓ | ✓ | ✓ | 72527 | 132
-| Polish   | ✓ | ✓ | | 72536 | 132
-| Bulgarian | ✓ | ✓ | | 0 | 0
-| Czech | ✓ | ✓ | | 0 | 0
-| Croatian | ✓ | ✓ | | 0 | 0
-| European Portuguese | ✓ | ✓ | | 0 | 0
-| Swedish | ✓ | ✓ | | 0 | 0
-| Thai | ✓ | ✓ | | 0 | 0
-| Turkish | ✓ | ✓ | | 0 | 0
-| Ukrainian | ✓ | ✓ | | 0 | 0
+| Language            | Training + Inference | Sample Splitting | Text Normalization | Files Pretrained | Speakers Pretrained |
+| ------------------- | -------------------- | ---------------- | ------------------ | ---------------- | ------------------- |
+| English             | ✓                    | ✓                | ✓                  | 978283           | 5415                |
+| German              | ✓                    | ✓                | ✓                  | 380175           | 1034                |
+| French              | ✓                    | ✓                |                    | 382797           | 1013                |
+| Spanish             | ✓                    | ✓                | ✓                  | 327944           | 960                 |
+| Russian             | ✓                    | ✓                | ✓                  | 72527            | 132                 |
+| Polish              | ✓                    | ✓                |                    | 72536            | 132                 |
+| Bulgarian           | ✓                    | ✓                |                    | 0                | 0                   |
+| Czech               | ✓                    | ✓                |                    | 0                | 0                   |
+| Croatian            | ✓                    | ✓                |                    | 0                | 0                   |
+| European Portuguese | ✓                    | ✓                |                    | 0                | 0                   |
+| Swedish             | ✓                    | ✓                |                    | 0                | 0                   |
+| Thai                | ✓                    | ✓                |                    | 0                | 0                   |
+| Turkish             | ✓                    | ✓                |                    | 0                | 0                   |
+| Ukrainian           | ✓                    | ✓                |                    | 0                | 0                   |
 
 <br />
 

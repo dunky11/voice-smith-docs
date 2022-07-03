@@ -1,12 +1,12 @@
 ---
 title: Text normalization
-description: Learn how to use VoiceSmith to automatically normalize a dataset for use in text-to-speech.
+description: Learn how to use VoiceSmith to normalize a dataset for use in text-to-speech automatically.
 ---
 
 ## What is text normalization?
 
-Text to speech models can only process spelled out text, for example most models have no way
-of learning how to map numbers to speech. Since most text from the real world isn't spelled out it's crucial
+Text-to-speech models can only process spelled-out text; for example, most models have no way
+of learning how to map numbers to speech. Since most text from the real world isn't spelled out, it's crucial
 to normalize it before training the model on it.
 
 Text normalization for TTS (text-to-speech) mainly includes the following steps:
@@ -36,36 +36,36 @@ Text normalization for TTS (text-to-speech) mainly includes the following steps:
 - He watched TV all day. -> He watched T V all day.
 - The FBI is already investigating her. -> The F B I is already investigating her.
 
-6. **Replacing uncommon symbols** by more commonly used ones:
+6. **Replacing uncommon symbols** with commonly used ones:
 
 - He said he “knew it all”. -> He said he "knew it all".
 - Micheal, hurry up… -> Micheal, hurry up...
 
-VoiceSmith can automatically apply above transformations on your datasets. **Steps 1-5 are language
-specific** and currently only work on english, german, spanish and russian speakers.
-**Step 6 is not language** specific and works on all languages.
+VoiceSmith can automatically apply the above transformations to your datasets. **Steps 1-5 are language-specific**
+and currently only work on English, German, Spanish and Russian speakers. **Step 6 is not language-specific** and works in all languages.
 
 ## How to normalize a dataset
 
 ### Creating a text normalization run
 
-In order to normalize a dataset you have to create a new text normalization run. Click on
-"Preprocessing" in the navigation and then click on "New Text Normalization Run". Afterwards
-click on "select" on the right side of the newly created run. The process of text normalization
+To normalize a dataset, you have to create a new text normalization run. Click on
+"Preprocessing" in the navigation and click "New Text Normalization Run."
+Afterward, click "select" on the right side of the newly created run. The process of text normalization
 is split into three steps:
 
 ### Configuration
 
 Here you can configure your text normalization run. Current configuration options include:
 
-| Name    | Description                                                                                                                                                                         |
-| ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Name    | Name used for identification purposes, is arbitrary.                                                                                                                                |
-| Dataset | Dataset to normalize, if a dataset is greyed out is already referenced by a run. If you haven't imported a dataset yet check out [Importing a dataset](/usage/importing-a-dataset). |
+| Name    | Description                                                                                                                                                                          |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Name    | Name used for identification purposes. Arbitrary.                                                                                                                                    |
+| Dataset | Dataset to normalize. If a dataset is greyed out, it is already referenced by a run. If you haven't imported a dataset, check out [Importing a dataset](/usage/importing-a-dataset). |
 
 ### Preprocessing
 
-After you have configured the text normalization run it's waiting time. Depending on the dataset size this can take minutes to hours.
+After you have configured the text normalization run, it's waiting time.
+Depending on the dataset size, this can take minutes to hours.
 
 ### Choose Samples
 
@@ -77,9 +77,9 @@ A table is shown of all samples that will be normalized. The table has the follo
 | New Text | Text after normalization, the text of the sample will be changed to this value. You can edit this by clicking on the pen next to the text. |
 | Reason   | The reason(s) why the sample will be normalized.                                                                                           |
 
-It is advised to at least skim through the table as automatic text normalization is not perfect. If there are samples which you don't want to be normalized,
-you can select them using the checkboxes on the left and then click on "Do not normalize selected". Those samples will stay in the dataset but will not be normalized.
+It is advised to at least skim through the table as automatic text normalization is not perfect. If there are samples you don't want to be normalized,
+you can select them using the checkboxes on the left and then click on "Do not normalize selected." Those samples will stay in the dataset but will not be normalized.
 
-If you are happy with the list of normalizations to apply you can click on "Next".
+If you are happy with the list of applied normalizations, you can click on "Next."
 Now the samples in your dataset will be changed according to transformations in the table. VoiceSmith may freeze for a little,
-depending on the number of normalizations in the table. This is currently the expected behaviour.
+depending on the number of normalizations in the table. This is currently the expected behavior.

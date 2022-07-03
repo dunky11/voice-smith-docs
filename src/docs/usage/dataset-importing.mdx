@@ -3,23 +3,23 @@ title: Importing a dataset
 description: Learn how to import a dataset into VoiceSmith.
 ---
 
-The first thing you should do is to import a dataset into VoiceSmith. VoiceSmith requires your dataset
-to follow a certain pattern. Each speaker is represented by a folder whose name is the speaker's name.
+The first thing you should do is import a dataset into VoiceSmith. VoiceSmith requires your dataset
+to follow a specific pattern; each speaker is represented by a folder whose name is the speaker's name.
 The folder contains the samples of the speaker. Each sample consists of one audio and one text file.
-Both audio and text files have to have the same name. In the .txt files you simply write the transcription
-of the audio file. Below is an example of a correctly formatted dataset that contains two speakers
-with two samples each. As you can see supported audio extensions are .flac and .wav:
+Both audio and text files have to have the same name. In the .txt files you write the transcription
+of the audio file. Below is an example of a correctly formatted dataset containing two speakers with two samples each.
+As you can see, supported audio extensions are .flac and .wav:
 
 ```
 .
 └── The Simpsons <- this folder represents the dataset name
-    └── Homer Simpson <- this folder represents the first speakers name
+    └── Homer Simpson <- this folder represents the first speaker's name
         ├── dF4mNcv1.wav <- this file is the audio part of the first sample of the speaker "Homer Simpson"
         ├── dF4mNcv1.txt <- this file is the text part of the first sample of the speaker "Homer Simpson"
         ├── M0J6zoHw.flac
         ├── M0J6zoHw.txt
         └── ...
-    └── Bart Simpson <- this folder represents the second speakers name
+    └── Bart Simpson <- this folder represents the second speaker's name
         ├── v1jo6jh.wav
         ├── v1jo6jh.txt
         ├── M0J6zoHw.flac
@@ -28,38 +28,34 @@ with two samples each. As you can see supported audio extensions are .flac and .
     ...
 ```
 
-The audio files can be sampled at any sampling rate as they will be resampled later. However, for best audio
-quality, it is recommended to have a sampling rate of at least 22.05khz.
+The audio files can be sampled at any sampling rate as they will be resampled later. However,
+to achieve the best possible quality, it is recommended to have a sampling rate of at least 22.05khz.
 
-VoiceSmith can preprocess and train on dataset which contain only on or multiple speakers. You can also
-import datasets with speakers who speak different languages. Keep in mind that while you can have different
-speakers who speak different languages in your dataset each speaker should speak only one language. If you
-have audio of Homer Simpson who speaks english and spanish you should create two speakers and name
-them for example "Homer Simpson (english)" and "Homer Simpson (spanish)".
+VoiceSmith can preprocess and train on both single and multi-speaker datasets. You can also
+import datasets with speakers who speak different languages. Remember that while you can have
+speakers who speak different languages in your dataset, each speaker should speak only one language.
+If you have English and Spanish audio of Homer Simpson, for example, you should create two
+speakers and name them "Homer Simpson (English)" and "Homer Simpson (Spanish)."
 
-Let's say we want to create the dataset above. First click on "Datasets" in the Navigation and
-then click on "Create Empty Dataset". Click on the pen next to the created datasets name to give
-your dataset a name, lets call it "The Simpsons".
+Let's say we want to create the dataset above. First, click on "Datasets" in the Navigation and
+then click on "Create Empty Dataset." Click on the pen next to the created datasets name to give
+your dataset a name, let's call it "The Simpsons".
 
-import { TestImage } from "../../components/images";
+Now we have to add Speakers to our dataset. To do that, click on "select" on the right side of the table.
+Then click on "Add Speakers From Folder." Finally, select the language of the speakers you want to add to the dataset
+from the dropdown and click on "Pick Speakers."
 
-<TestImage />
-
-Next we have to add Speakers to our dataset. To do that click on "select" on right side in the table.
-Then click on "Add Speakers From Folder". Select the language of the speakers you want to add to the dataset
-from the dropdown and click on "Pick Speakers".
-
-<TestImage />
-
-As described in the graphic above each speaker is represented by a folder, so we will select both the
-folders named "Homer Simpson" and "Bart Simpson". You can add multiple speakers at once by first left-clicking
+As described in the graphic above, each speaker is represented by a folder, so we will select the
+folders named "Homer Simpson" and "Bart Simpson." You can import multiple speakers at once by first left-clicking
 on one folder and then shift+left clicking on another folder. Click on "Open" to confirm the selection.
 
-The speakers and their samples will now imported into the software. Depending on the number of text-audio pairs
+The speakers and their samples will now be imported into the software. Depending on the number of text-audio pairs,
 this can take multiple minutes.
 
-If your imported dataset is noisy it can now be cleaned up by VoiceSmiths automatic dataset preprocessing tools.
-While they can improve the quality of the final voices, using those tools is optional and their usefulness
-depends on your dataset. Next we will exlain the three preprocessing tools:
-"Text Normalization", "Sample Splitting" and "Dataset Cleaning". You can also skip them and jump straight ahead
-to "Training" in order to clone the voices of the speakers in your dataset.
+If your imported dataset is noisy, it can now be cleaned up by VoiceSmith's automatic dataset preprocessing tools.
+While they can improve the quality of the final voices, using those tools is optional, and their usefulness
+depends on your dataset. Next we will explain the preprocessing tools:
+["Text Normalization"](/usage/text-normalization), ["Sample Splitting"](/usage/sample-splitting)
+and ["Dataset Cleaning"](/usage/dataset-cleaning).
+You can also skip them and jump straight ahead to ["Training"](/usage/training) in order to clone the
+voices of the speakers in your dataset.
